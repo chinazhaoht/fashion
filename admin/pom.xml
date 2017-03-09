@@ -1,24 +1,690 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <artifactId>fashion</artifactId>
+        <artifactId>parent</artifactId>
         <groupId>com.fashion</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>admin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
     <packaging>war</packaging>
     <name>admin Maven Webapp</name>
     <url>http://maven.apache.org</url>
+
     <dependencies>
+        <dependency>
+            <groupId>edu.uci.ics</groupId>
+            <artifactId>crawler4j</artifactId>
+            <version>4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fashion</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+
+        <!-- SPRING basic begin(涓�鑸笉闇�瑕佹樉寮忓畾涔�) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <!-- 鎺掗櫎渚濊禆 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        <!-- email/scheduler/freemarker -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <!-- SPRING basic end -->
+
+        <!-- security begin -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
+
+
+        <!-- security end -->
+
+        <!-- AOP begin -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- AOP end -->
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+        </dependency>
+
+        <!-- spring data -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+
+        <!-- spring orm -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+
+        <!-- connection pool -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- PERSISTENCE end -->
+
+        <!-- WEB begin -->
+        <!-- spring mvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!-- j2ee web spec -->
+
+        <!-- WEB end -->
+
+        <!-- TIMER -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+
+        <!-- JSR303 Bean Validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <!-- JSON begin -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>jaxrs-api</artifactId>
+            <version>3.0.9.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wordnik</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.3.10</version>
+        </dependency>
+        <!-- JSON end -->
+
+        <!-- XML begin -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 閲嶆柊瀹氫箟Java XPath Engine鍒版渶鏂扮増锛岄伩鍏嶆棫鐗堥偅浜涗笉蹇呰鐨勪緷璧� -->
+        <dependency>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+        </dependency>
+        <!-- XML end -->
+
+        <!-- LOGGING begin -->
+        <!-- slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <!-- logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <!-- 浠ｇ爜鐩存帴璋冪敤log4j浼氳妗ユ帴鍒皊lf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- 浠ｇ爜鐩存帴璋冪敤common-logging浼氳妗ユ帴鍒皊lf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- 浠ｇ爜鐩存帴璋冪敤java.util.logging浼氳妗ユ帴鍒皊lf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- log4jdbc -->
+        <dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- LOGGING end -->
+
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+
+        <!-- GENERAL UTILS begin -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- google java library -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <!-- joda -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-jsptags</artifactId>
+        </dependency>
+        <!-- joda for jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+        </dependency>
+        <!-- GENERAL UTILS end -->
+
+        <!-- jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
+        <!-- commons-pool -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
+        <!-- OTHER TOOLS end -->
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+
+        <!-- TEST begin -->
+        <!-- junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- TEST end -->
+        <dependency>
+            <groupId>edu.uci.ics</groupId>
+            <artifactId>crawler4j</artifactId>
+            <version>4.2</version>
+        </dependency>
+
+        <!--<dependency>
+            <groupId>com.baidu.ueditor</groupId>
+            <artifactId>ueditor</artifactId>
+            <version>1.1.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/UEditor-for-aliyun-OSS-1.2.0-beta.jar</systemPath>
+        </dependency>-->
+
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-client</artifactId>
+            <version>2.6.36</version>
+        </dependency>
+
     </dependencies>
+
+
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>test/*</exclude>
+                            <exclude>dev/*</exclude>
+                            <exclude>product/*</exclude>
+                            <exclude>uat/*</exclude>
+                            <exclude>autotest/*</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>test/*</exclude>
+                            <exclude>dev/*</exclude>
+                            <exclude>product/*</exclude>
+                            <exclude>uat/*</exclude>
+                            <exclude>autotest/*</exclude>
+                            <exclude>oss.properties</exclude>
+                            <exclude>OSSKey.properties</exclude>
+                            <exclude>stanley.properties</exclude>
+                            <exclude>qrcode.properties</exclude>
+                        </excludes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources/dev</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>test</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>test/*</exclude>
+                            <exclude>dev/*</exclude>
+                            <exclude>product/*</exclude>
+                            <exclude>uat/*</exclude>
+                            <exclude>autotest/*</exclude>
+                            <exclude>oss.properties</exclude>
+                            <exclude>OSSKey.properties</exclude>
+                            <exclude>stanley.properties</exclude>
+                            <exclude>qrcode.properties</exclude>
+                        </excludes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources/test</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>autotest</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>test/*</exclude>
+                            <exclude>dev/*</exclude>
+                            <exclude>product/*</exclude>
+                            <exclude>uat/*</exclude>
+                            <exclude>autotest/*</exclude>
+                            <exclude>oss.properties</exclude>
+                            <exclude>OSSKey.properties</exclude>
+                            <exclude>stanley.properties</exclude>
+                            <exclude>qrcode.properties</exclude>
+                        </excludes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources/autotest</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>test/*</exclude>
+                            <exclude>dev/*</exclude>
+                            <exclude>product/*</exclude>
+                            <exclude>uat/*</exclude>
+                            <exclude>autotest/*</exclude>
+                            <exclude>oss.properties</exclude>
+                            <exclude>OSSKey.properties</exclude>
+                            <exclude>stanley.properties</exclude>
+                            <exclude>qrcode.properties</exclude>
+                        </excludes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources/uat</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>product</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>test/*</exclude>
+                            <exclude>dev/*</exclude>
+                            <exclude>product/*</exclude>
+                            <exclude>uat/*</exclude>
+                            <exclude>autotest/*</exclude>
+                            <exclude>oss.properties</exclude>
+                            <exclude>OSSKey.properties</exclude>
+                            <exclude>stanley.properties</exclude>
+                            <exclude>qrcode.properties</exclude>
+                        </excludes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources/product</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
-        <finalName>admin</finalName>
+        <pluginManagement>
+            <plugins>
+                <!-- compiler鎻掍欢, 璁惧畾JDK鐗堟湰 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+
+                        <!-- for com.sun.* -->
+                        <compilerArguments>
+                            <bootclasspath>
+                                ${java.home}/lib/rt.jar
+                            </bootclasspath>
+                        </compilerArguments>
+                    </configuration>
+                </plugin>
+
+                <!-- resource鎻掍欢 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+
+                <!-- test鎻掍欢, 浠呮祴璇曞悕绉颁负*Test鐨勭被, 浣跨敤鏀寔鍒嗙粍娴嬭瘯鐨剆urefire-junit47 driver -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.15</version>
+                    <configuration>
+                        <includes>
+                            <include>**/*Test.java</include>
+                        </includes>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.surefire</groupId>
+                            <artifactId>surefire-junit47</artifactId>
+                            <version>2.15</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <!-- 澧炲姞鏇村鐨凷ource鍜孴est Source鐩綍鎻掍欢 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>1.8</version>
+                </plugin>
+
+                <!-- war鎵撳寘鎻掍欢, 璁惧畾war鍖呭悕绉颁笉甯︾増鏈彿 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+
+
+                <!-- jar鎵撳寘鐩稿叧鎻掍欢 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                </plugin>
+
+                <!-- enforcer鎻掍欢, 閬垮厤琚緷璧栫殑渚濊禆寮曞叆杩囨湡鐨刯ar鍖� -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>1.3</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-banned-dependencies</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>3.2.3</version>
+                                    </requireMavenVersion>
+                                    <requireJavaVersion>
+                                        <version>1.8</version>
+                                    </requireJavaVersion>
+                                    <bannedDependencies>
+                                        <searchTransitive>true</searchTransitive>
+                                        <excludes>
+                                            <exclude>commons-logging</exclude>
+                                            <exclude>aspectj:aspectj*</exclude>
+                                            <exclude>org.springframework:2.*</exclude>
+                                            <exclude>org.springframework:3.0.*</exclude>
+                                        </excludes>
+                                    </bannedDependencies>
+                                </rules>
+                                <fail>true</fail>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- assembly鎻掍欢 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+
+                <!-- dependency鐩稿叧鎻掍欢 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.8</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <configuration>
+                        <url>http://localhost:8090/manager/text</url>
+                        <username>admin</username>
+                        <password>admin</password>
+                        <path>/admin</path>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>

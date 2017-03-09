@@ -1,0 +1,7 @@
+com\fashion\model\base\LocalDateTimePersistenceConverter.class
+com\fashion\model\User.class
+com\fashion\App.class
+com\fashion\model\base\BaseEntity.class
+com\fashion\model\Admin.class
+com\fashion\model\ArticleType.class
+com\fashion\model\Article.class
